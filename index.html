@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haspah Mokanfou Foundation – Empowering Lives, Inspiring Lives</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0B1F4B;
+      --blue:    #1A5BB5;
+      --sky:     #4FA3D1;
+      --light:   #D6EAF8;
+      --white:   #FFFFFF;
+      --off:     #F4F8FD;
+      --red:     #C0392B;
+      --green:   #1E7B45;
+      --gold:    #F0B429;
+      --text:    #1A1A2E;
+      --muted:   #5C6A85;
+      --border:  #CBD9EC;
+      --radius:  12px;
+      --shadow:  0 4px 24px rgba(11,31,75,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); }
+
+    /* ---- PAGES ---- */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ---- TOPBAR ---- */
+    .topbar {
+      background: var(--navy);
+      color: var(--light);
+      font-size: 0.78rem;
+      padding: 6px 0;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    .topbar span { opacity: 0.8; }
+    .topbar strong { color: var(--gold); }
+
+    /* ---- HEADER ---- */
+    header {
+      background: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(11,31,75,0.08);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+    }
+    .logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      /* Replace background with logo image when available:
+         background: url('logo.png') center/cover; */
+    }
+    .logo-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .logo-text p {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ---- HAMBURGER ---- */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ---- NAV ---- */
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a, nav button.nav-btn {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--navy);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a:hover, nav button.nav-btn:hover { background: var(--light); color: var(--blue); }
+    nav .nav-donate {
+      background: var(--blue);
+      color: var(--white) !important;
+      font-weight: 600;
+    }
+    nav .nav-donate:hover { background: var(--navy) !important; }
+
+    /* ---- HERO ---- */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #163170 55%, var(--blue) 100%);
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234FA3D1' fill-opacity='0.06'%3E%3Cpath d='M40 0L0 40 40 80 80 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 80px 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(240,180,41,0.18);
+      border: 1px solid rgba(240,180,41,0.35);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      max-width: 680px;
+    }
+    .hero h2 span { color: var(--sky); }
+    .hero p {
+      color: var(--light);
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,180,41,0.4); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.22); }
+
+    /* ---- STATS ---- */
+    .stats-row {
+      max-width: 1200px;
+      margin: -40px auto 0;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .stat-card {
+      background: var(--white);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .stat-card .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+    }
+    .stat-card .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* ---- SECTIONS ---- */
+    section { padding: 80px 24px; }
+    .section-inner { max-width: 1200px; margin: auto; }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    /* ---- PILLARS ---- */
+    .pillars-bg { background: var(--off); }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .pillar-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s, box-shadow 0.25s;
+      border-top: 4px solid var(--blue);
+    }
+    .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(11,31,75,0.13); }
+    .pillar-icon {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+    .pillar-card h3 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+    .pillar-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .pillar-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .pillar-checks { list-style: none; margin-bottom: 28px; }
+    .pillar-checks li {
+      font-size: 0.88rem;
+      color: var(--text);
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pillar-checks li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .btn-pillar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--blue);
+      background: var(--light);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-pillar:hover { background: var(--blue); color: var(--white); }
+
+    /* ---- IMPACT / EVENTS ---- */
+    .impact-empty {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--muted);
+      font-size: 1rem;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+    }
+    .impact-empty p { margin-top: 10px; opacity: 0.7; }
+
+    /* ---- CTA BANNER ---- */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 16px;
+    }
+    .cta-banner p {
+      font-size: 1.05rem;
+      opacity: 0.85;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .cta-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .btn-white {
+      background: var(--white);
+      color: var(--navy);
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s;
+    }
+    .btn-white:hover { transform: translateY(-2px); }
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.5);
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.15); }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.75);
+      padding: 60px 24px 24px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .footer-brand .tagline {
+      font-size: 0.75rem;
+      color: var(--sky);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .footer-brand p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      max-width: 340px;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: var(--white);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .social-btn:hover { background: var(--blue); }
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a, .footer-links button {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover, .footer-links button:hover { color: var(--sky); }
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+    }
+    .footer-contact .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+    }
+
+    /* ====== DONATE PAGE ====== */
+    .donate-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+    .donate-hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .donate-hero p { color: var(--light); font-size: 1.05rem; opacity: 0.9; }
+
+    .donate-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .donate-form-wrap {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px;
+    }
+    .form-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--navy);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--light);
+    }
+    .cause-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .cause-card {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cause-card:hover, .cause-card.selected {
+      border-color: var(--blue);
+      background: var(--light);
+    }
+    .cause-card .cause-icon { font-size: 1.4rem; margin-bottom: 6px; }
+    .cause-card .cause-name { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
+    .cause-card .cause-desc { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .amount-btn {
+      border: 2px solid var(--border);
+      background: var(--white);
+      border-radius: 8px;
+      padding: 12px 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .amount-btn:hover, .amount-btn.selected {
+      border-color: var(--blue);
+      background: var(--light);
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--blue); }
+    .form-group .hint {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+    .mpesa-box {
+      background: linear-gradient(135deg, #1A5BB5 0%, #0B1F4B 100%);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 24px;
+      color: var(--white);
+    }
+    .mpesa-box .mpesa-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .mpesa-box p { font-size: 0.82rem; opacity: 0.8; }
+    .btn-donate-submit {
+      width: 100%;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 16px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-donate-submit:hover { background: #155e34; transform: translateY(-2px); }
+    .tax-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .impact-sidebar { position: sticky; top: 90px; }
+    .impact-sidebar h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+    .impact-item {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .impact-item .i-icon { font-size: 2rem; flex-shrink: 0; }
+    .impact-item .i-amount {
+      font-size: 0.78rem;
+      color: var(--blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .impact-item .i-desc {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-top: 2px;
+    }
+    .paybill-info {
+      background: var(--off);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-top: 10px;
+    }
+    .paybill-info h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .paybill-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+    }
+    .paybill-row span:first-child { color: var(--muted); }
+    .paybill-row span:last-child { font-weight: 700; color: var(--navy); }
+    .paybill-steps { margin-top: 14px; }
+    .paybill-steps li {
+      font-size: 0.82rem;
+      color: var(--text);
+      margin-bottom: 6px;
+      padding-left: 20px;
+      position: relative;
+    }
+    .paybill-steps li::before {
+      content: attr(data-n);
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* ====== VOLUNTEER PAGE ====== */
+    .vol-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1E6B3A 100%);
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+    .vol-hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .vol-hero p { color: var(--light); font-size: 1.05rem; opacity: 0.9; }
+    .vol-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .vol-form-wrap {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px;
+    }
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      resize: vertical;
+      min-height: 100px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group textarea:focus { border-color: var(--blue); }
+    .btn-volunteer-submit {
+      width: 100%;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 16px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-volunteer-submit:hover { background: var(--navy); transform: translateY(-2px); }
+    .vol-sidebar { position: sticky; top: 90px; }
+    .vol-role-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .vol-role-card .role-icon { font-size: 2.4rem; margin-bottom: 10px; }
+    .vol-role-card h4 { font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .vol-role-card p { font-size: 0.84rem; color: var(--muted); }
+
+    /* ====== EVENTS PAGE ====== */
+    .events-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #2C1A6B 100%);
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+    .events-hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .events-hero p { color: var(--light); font-size: 1.05rem; opacity: 0.9; }
+    .events-body {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .events-empty {
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--muted);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+    }
+    .events-empty .empty-icon { font-size: 3rem; margin-bottom: 16px; }
+    .events-empty h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .events-empty p { max-width: 380px; margin: auto; line-height: 1.7; }
+
+    /* ====== BLOG PAGE ====== */
+    .blog-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #4A2C0B 100%);
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+    .blog-hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .blog-hero p { color: var(--light); font-size: 1.05rem; opacity: 0.9; }
+    .blog-body {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .blog-empty {
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--muted);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+    }
+    .blog-empty .empty-icon { font-size: 3rem; margin-bottom: 16px; }
+    .blog-empty h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .blog-empty p { max-width: 380px; margin: auto; line-height: 1.7; }
+
+    /* ---- MOBILE ---- */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .donate-body, .vol-body { grid-template-columns: 1fr; }
+      .impact-sidebar, .vol-sidebar { position: static; }
+    }
+    @media (max-width: 680px) {
+      .hamburger { display: flex; }
+      nav { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; right: 0; background: var(--white); padding: 16px 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 200; }
+      nav.open { display: flex; }
+      nav a, nav button.nav-btn { width: 100%; text-align: left; padding: 12px 16px; border-radius: 8px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .cause-grid { grid-template-columns: 1fr 1fr; }
+      .amount-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>🌍 <strong>Making a Difference Since 2019</strong> &nbsp;|&nbsp; Empowering Lives, Inspiring Lives across Kenya 🇰🇪</span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-block" onclick="showPage('home')">
+      <div class="logo-img">
+        <!-- 
+          LOGO PLACEHOLDER: Replace the emoji below with an <img> tag when logo is ready.
+          Example: <img src="logo.png" alt="Haspah Mokanfou Foundation" style="width:52px;height:52px;border-radius:50%;object-fit:cover;" />
+        -->
+        🌿
+      </div>
+      <div class="logo-text">
+        <h1>Haspah Mokanfou Foundation</h1>
+        <p>Empowering Lives, Inspiring Lives</p>
+      </div>
+    </div>
+
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="main-nav">
+      <button class="nav-btn" onclick="showPage('home')">🏠 Home</button>
+      <button class="nav-btn" onclick="showPage('events')">📅 Events</button>
+      <button class="nav-btn" onclick="showPage('blog')">📝 Blog</button>
+      <button class="nav-btn nav-donate" onclick="showPage('donate')">💛 Donate</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- HOME PAGE -->
+<!-- ============================================================ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🌟 Making a Difference Since 2019</div>
+      <h2>Building Hope,<br/><span>Transforming Lives</span></h2>
+      <p>Empowering children and communities across Kenya through education, healthcare, food security, and sustainable development.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('donate')">💛 Donate Now</button>
+        <button class="btn-secondary" onclick="showPage('volunteer')">🤝 Join Us</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">30+</div>
+        <div class="stat-label">🎓 Students Sponsored</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">70+</div>
+        <div class="stat-label">🍽️ Meals Provided</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">⚕️ Medical Cases</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">🏗️ Projects Funded</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILLARS -->
+  <section class="pillars-bg">
+    <div class="section-inner">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Our Four Pillars</h2>
+      <p class="section-sub">Creating sustainable impact through targeted interventions in education, nutrition, healthcare, and economic empowerment.</p>
+      <div class="pillars-grid">
+
+        <div class="pillar-card">
+          <div class="pillar-icon">📚</div>
+          <h3>Education</h3>
+          <h4>Education Support</h4>
+          <p>Providing school fees, uniforms, and learning materials for needy students to ensure every child has access to quality education.</p>
+          <ul class="pillar-checks">
+            <li>Full scholarship programs</li>
+            <li>School supplies distribution</li>
+            <li>Mentorship programs</li>
+          </ul>
+          <button class="btn-pillar" onclick="showPage('donate')">Support Education →</button>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🍱</div>
+          <h3>Food Relief</h3>
+          <h4>Food &amp; Relief</h4>
+          <p>Extending food assistance and relief to extremely poor children and families facing hunger and food insecurity.</p>
+          <ul class="pillar-checks">
+            <li>Monthly food packages</li>
+            <li>School feeding programs</li>
+            <li>Emergency relief</li>
+          </ul>
+          <button class="btn-pillar" onclick="showPage('donate')">Support Food Relief →</button>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🏥</div>
+          <h3>Healthcare</h3>
+          <h4>Medical Support</h4>
+          <p>Providing essential medical care, treatment, and health services to extremely poor children who cannot afford healthcare.</p>
+          <ul class="pillar-checks">
+            <li>Free medical consultations</li>
+            <li>Medication and supplies</li>
+            <li>Health education</li>
+          </ul>
+          <button class="btn-pillar" onclick="showPage('donate')">Support Healthcare →</button>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🌱</div>
+          <h3>Community</h3>
+          <h4>Community Projects</h4>
+          <p>Implementing sustainable projects that economically empower communities and create long-term self-sufficiency.</p>
+          <ul class="pillar-checks">
+            <li>Vocational training</li>
+            <li>Microfinance support</li>
+            <li>Agricultural development</li>
+          </ul>
+          <button class="btn-pillar" onclick="showPage('donate')">Support Empowerment →</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RECENT IMPACT / EVENTS -->
+  <section>
+    <div class="section-inner">
+      <div class="section-label">Updates</div>
+      <h2 class="section-title">Recent Impact</h2>
+      <div class="impact-empty">
+        <p>🌍 No recent events yet. Check back soon for updates on our latest activities and impact stories.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <h2>Ready to Make a Real Difference? 💙</h2>
+    <p>Your contribution transforms lives. Join us in building a brighter future for Kenyan children and communities.</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="showPage('donate')">💛 Donate Now</button>
+      <button class="btn-outline-white" onclick="showPage('volunteer')">🤝 Become a Volunteer</button>
+    </div>
+  </div>
+
+</div><!-- /page-home -->
+
+
+<!-- ============================================================ -->
+<!-- DONATE PAGE -->
+<!-- ============================================================ -->
+<div class="page" id="page-donate">
+
+  <div class="donate-hero">
+    <h2>💛 Make Your Impact</h2>
+    <p>Every shilling counts. Transform lives today.</p>
+  </div>
+
+  <div class="donate-body">
+
+    <div class="donate-form-wrap">
+      <h3 class="form-section-title">🎯 Choose Your Cause</h3>
+      <div class="cause-grid">
+        <div class="cause-card selected" onclick="selectCause(this)">
+          <div class="cause-icon">📚</div>
+          <div class="cause-name">Education</div>
+          <div class="cause-desc">School fees &amp; supplies</div>
+        </div>
+        <div class="cause-card" onclick="selectCause(this)">
+          <div class="cause-icon">🍱</div>
+          <div class="cause-name">Food Relief</div>
+          <div class="cause-desc">Meals for families</div>
+        </div>
+        <div class="cause-card" onclick="selectCause(this)">
+          <div class="cause-icon">⚕️</div>
+          <div class="cause-name">Healthcare</div>
+          <div class="cause-desc">Medical support</div>
+        </div>
+        <div class="cause-card" onclick="selectCause(this)">
+          <div class="cause-icon">🌱</div>
+          <div class="cause-name">Empowerment</div>
+          <div class="cause-desc">Community projects</div>
+        </div>
+      </div>
+
+      <h3 class="form-section-title">💰 Amount (KES)</h3>
+      <div class="amount-grid">
+        <button class="amount-btn selected" onclick="selectAmount(this, 500)">KES 500</button>
+        <button class="amount-btn" onclick="selectAmount(this, 1000)">KES 1,000</button>
+        <button class="amount-btn" onclick="selectAmount(this, 2500)">KES 2,500</button>
+        <button class="amount-btn" onclick="selectAmount(this, 5000)">KES 5,000</button>
+      </div>
+      <div class="form-group">
+        <input type="number" id="custom-amount" placeholder="Or enter custom amount (KES)" oninput="clearAmountBtns()" />
+      </div>
+
+      <h3 class="form-section-title">👤 Your Details</h3>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter your full name" />
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label>📱 M-Pesa Number</label>
+        <input type="tel" placeholder="254XXXXXXXXX" />
+        <p class="hint">Enter your Safaricom number in format: 254XXXXXXXXX</p>
+      </div>
+
+      <div class="mpesa-box">
+        <div class="mpesa-logo">📱 M-Pesa Payment</div>
+        <p>Secure mobile payment via Safaricom M-Pesa</p>
+      </div>
+
+      <button class="btn-donate-submit" onclick="handleDonate()">
+        💰 Donate via M-Pesa
+      </button>
+      <p class="tax-note">🧾 Tax Deductible: All donations are tax-deductible. Receipt sent via email.</p>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="impact-sidebar">
+      <h3>🎯 Your Impact</h3>
+
+      <div class="impact-item">
+        <div class="i-icon">📚</div>
+        <div>
+          <div class="i-amount">KES 500</div>
+          <div class="i-desc">School supplies for 1 student</div>
+        </div>
+      </div>
+      <div class="impact-item">
+        <div class="i-icon">🍽️</div>
+        <div>
+          <div class="i-amount">KES 1,000</div>
+          <div class="i-desc">Feeds a family of 5 for a week</div>
+        </div>
+      </div>
+      <div class="impact-item">
+        <div class="i-icon">⚕️</div>
+        <div>
+          <div class="i-amount">KES 2,500</div>
+          <div class="i-desc">Medical treatment for 2 children</div>
+        </div>
+      </div>
+      <div class="impact-item">
+        <div class="i-icon">🎓</div>
+        <div>
+          <div class="i-amount">KES 5,000</div>
+          <div class="i-desc">School fees for one term</div>
+        </div>
+      </div>
+
+      <div class="paybill-info">
+        <h4>📲 M-Pesa Paybill Details</h4>
+        <div class="paybill-row">
+          <span>Business Number</span>
+          <span>[PAYBILL NUMBER]</span>
+        </div>
+        <div class="paybill-row">
+          <span>Account Number</span>
+          <span>[YOUR NAME / CAUSE]</span>
+        </div>
+        <div class="paybill-row">
+          <span>Amount</span>
+          <span>As per your choice</span>
+        </div>
+        <ol class="paybill-steps" style="list-style:none;">
+          <li data-n="1.">Go to M-Pesa on your Safaricom phone</li>
+          <li data-n="2.">Select "Lipa na M-Pesa"</li>
+          <li data-n="3.">Select "Pay Bill"</li>
+          <li data-n="4.">Enter Business No. above</li>
+          <li data-n="5.">Enter your name as Account No.</li>
+          <li data-n="6.">Enter amount and confirm with PIN</li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /page-donate -->
+
+
+<!-- ============================================================ -->
+<!-- VOLUNTEER PAGE -->
+<!-- ============================================================ -->
+<div class="page" id="page-volunteer">
+
+  <div class="vol-hero">
+    <h2>🤝 Join Our Team</h2>
+    <p>Be the change. Volunteer with us and make a real difference in your community.</p>
+  </div>
+
+  <div class="vol-body">
+
+    <div class="vol-form-wrap">
+      <h3 class="form-section-title">📝 Volunteer Application</h3>
+
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" placeholder="Enter your full name" required />
+      </div>
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" placeholder="your@email.com" required />
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" placeholder="+254 700 000 000" required />
+      </div>
+      <div class="form-group">
+        <label>Availability *</label>
+        <select required>
+          <option value="">Select...</option>
+          <option>Weekdays only</option>
+          <option>Weekends only</option>
+          <option>Both weekdays and weekends</option>
+          <option>Flexible</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Skills &amp; Expertise *</label>
+        <textarea placeholder="Tell us about your skills, experience, or what you'd like to help with..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Why do you want to volunteer? (Optional)</label>
+        <textarea placeholder="Share your motivation..." style="min-height:80px;"></textarea>
+      </div>
+
+      <button class="btn-volunteer-submit" onclick="handleVolunteer()">
+        🤝 Submit Application
+      </button>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="vol-sidebar">
+      <div class="vol-role-card">
+        <div class="role-icon">📚</div>
+        <h4>Education</h4>
+        <p>Tutoring &amp; mentorship</p>
+      </div>
+      <div class="vol-role-card">
+        <div class="role-icon">🍽️</div>
+        <h4>Food Drives</h4>
+        <p>Distribution &amp; logistics</p>
+      </div>
+      <div class="vol-role-card">
+        <div class="role-icon">⚕️</div>
+        <h4>Medical</h4>
+        <p>Health camps &amp; support</p>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /page-volunteer -->
+
+
+<!-- ============================================================ -->
+<!-- EVENTS PAGE -->
+<!-- ============================================================ -->
+<div class="page" id="page-events">
+
+  <div class="events-hero">
+    <h2>📅 Upcoming Events</h2>
+    <p>Be part of our journey. Join us at our next community event.</p>
+  </div>
+
+  <div class="events-body">
+    <div class="events-empty">
+      <div class="empty-icon">🗓️</div>
+      <h3>No Events Yet</h3>
+      <p>We're planning exciting upcoming events. Stay tuned and check back soon! Follow us on social media for announcements. 🌍</p>
+    </div>
+  </div>
+
+</div><!-- /page-events -->
+
+
+<!-- ============================================================ -->
+<!-- BLOG PAGE -->
+<!-- ============================================================ -->
+<div class="page" id="page-blog">
+
+  <div class="blog-hero">
+    <h2>📝 Stories &amp; Updates</h2>
+    <p>Impact stories, community news, and updates from the ground.</p>
+  </div>
+
+  <div class="blog-body">
+    <div class="blog-empty">
+      <div class="empty-icon">✍️</div>
+      <h3>Coming Soon</h3>
+      <p>We'll be sharing stories of change, impact reports, and community updates here. Stay tuned! 💙</p>
+    </div>
+  </div>
+
+</div><!-- /page-blog -->
+
+
+<!-- ============================================================ -->
+<!-- FOOTER (static, appears on all pages) -->
+<!-- ============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <h3>Haspah Mokanfou Foundation</h3>
+        <p class="tagline">Empowering Lives, Inspiring Lives</p>
+        <p>Empowering communities across Kenya through education, healthcare, food security, and economic development. Together, we create lasting change. 🌍</p>
+        <div class="footer-socials">
+          <!-- Replace # with actual social media links when available -->
+          <a href="#" class="social-btn" aria-label="Facebook">f</a>
+          <a href="#" class="social-btn" aria-label="Twitter/X">𝕏</a>
+          <a href="#" class="social-btn" aria-label="Instagram">📷</a>
+          <a href="#" class="social-btn" aria-label="YouTube">▶</a>
+          <a href="#" class="social-btn" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">→ Home</button></li>
+          <li><button onclick="showPage('events')">→ Events</button></li>
+          <li><button onclick="showPage('blog')">→ Blog</button></li>
+          <li><button onclick="showPage('volunteer')">→ Volunteer</button></li>
+          <li><button onclick="showPage('donate')">→ Donate</button></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Get in Touch</h4>
+        <ul class="footer-contact footer-links" style="list-style:none;">
+          <li>
+            <span class="icon">📍</span>
+            <span>Nairobi, Kenya</span>
+          </li>
+          <li>
+            <span class="icon">✉️</span>
+            <!-- Update email below -->
+            <a href="mailto:info@haspahfoundation.org">info@haspahfoundation.org</a>
+          </li>
+          <li>
+            <span class="icon">📞</span>
+            <!-- Update phone below -->
+            <a href="tel:+254700000000">+254 700 000 000</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Haspah Mokanfou Foundation. All rights reserved.</span>
+      <span>Built with ❤️ for a better Kenya 🇰🇪</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // ---- PAGE ROUTER ----
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + name);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Close mobile nav
+    document.getElementById('main-nav').classList.remove('open');
+  }
+
+  // ---- MOBILE MENU ----
+  function toggleMenu() {
+    document.getElementById('main-nav').classList.toggle('open');
+  }
+
+  // ---- DONATE: cause selector ----
+  function selectCause(el) {
+    document.querySelectorAll('.cause-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // ---- DONATE: amount selector ----
+  let selectedAmount = 500;
+  function selectAmount(el, amt) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedAmount = amt;
+    document.getElementById('custom-amount').value = '';
+  }
+  function clearAmountBtns() {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+  }
+
+  // ---- DONATE: submit ----
+  function handleDonate() {
+    const custom = document.getElementById('custom-amount').value;
+    const amt = custom ? custom : selectedAmount;
+    alert('✅ Thank you for your generosity!\n\nPlease complete your M-Pesa payment using the Paybill details on the right. You\'ll receive a confirmation receipt by email. 💛🙏');
+  }
+
+  // ---- VOLUNTEER: submit ----
+  function handleVolunteer() {
+    // TODO: Update with actual email address before deploying
+    const email = 'volunteer@haspahfoundation.org';
+    window.location.href = 'mailto:' + email + '?subject=Volunteer Application – Haspah Mokanfou Foundation';
+  }
+</script>
+
+</body>
+</html>
